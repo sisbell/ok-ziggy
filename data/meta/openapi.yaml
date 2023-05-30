@@ -1,0 +1,93 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "OK Ziggy"
+  description: "Serves as a dynamic proxy, enabling services like news, weather, travel and games."
+servers:
+  - url: "${scheme}://${host}/api/v1"
+paths:
+  /services:
+    get:
+      summary: Retrieve a list of available services
+      operationId: "getServices"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    serviceId:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+  /specs/{serviceId}:
+    get:
+      parameters:
+        - name: serviceId
+          in: path
+          description: ID of the service to retrieve the OpenAPI Specification
+          required: true
+          schema:
+            type: string
+      summary: Retrieve the OpenAPI Specification for the specified service
+      operationId: "getSpec"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+            application/x-yaml:
+              schema:
+                type: string
+  /proxy:
+    post:
+      summary: Proxy to a service operation
+      operationId: "proxyRequest"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                serviceId:
+                  type: string
+                  description: Service ID of the service to make the request to
+                operationId:
+                  type: string
+                  description: operationId of the operation to make
+                httpMethod:
+                  type: string
+                  description: HTTP method of the request to make (e.g., "GET", "POST", "PUT", etc.)
+                path:
+                  type: string
+                  description: Path of the request to make
+                requestBody:
+                  type: string
+                  description: Body of the request to make, if applicable
+                headers:
+                  type: object
+                  description: HTTP Request headers for the service operation
+                  additionalProperties:
+                    type: string
+              required:
+                - serviceId
+                - operationId
+                - httpMethod
+                - path
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Response from the service

@@ -1,0 +1,19 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "OK Ziggy",
+    "name_for_model": "ziggy",
+    "description_for_human": "Serves as a dynamic proxy, enabling services like news, weather, travel and games.",
+    "description_for_model": "${prompt}",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "${scheme}://${host}/openapi.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "${scheme}://${host}/images/logo.webp",
+    "contact_email": "shane@zapvine.com",
+    "legal_info_url": "${scheme}://${host}/legal.html"
+  }
+  

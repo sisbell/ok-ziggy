@@ -1,0 +1,25 @@
+name: ok_ziggy
+description: A dynamic proxy, enabling seamless interaction with multiple services via OpenAPI Specification.
+version: 0.1.0
+repository: https://github.com/sisbell/ok-ziggy
+issue_tracker: https://github.com/sisbell/ok-ziggy/issues
+executables:
+  ziggy:
+platforms:
+  linux:
+  macos:
+  windows:
+
+environment:
+  sdk: ^3.0.1
+
+dependencies:
+  args: ^2.4.0
+  http: ^0.13.0
+  shelf: ^1.4.0
+  shelf_cors_headers: ^0.1.5
+  shelf_router: ^1.1.0
+  shelf_static: ^1.1.2
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.21.0
